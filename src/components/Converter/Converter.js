@@ -11,12 +11,13 @@ const Converter = () => {
     const {value} = event.target;
     setHexInput(value);
     if (value.length === 7) {
-      const result = hetToRgbConverter(value);
+      let result = hetToRgbConverter(value);
       if (result) {
-        setRgbOutput(`rgb(${result.r}, ${result.g}, ${result.b})`);
+        result = `rgb(${result.r}, ${result.g}, ${result.b})`
       } else {
-        setRgbOutput('Error');
+        result = 'Error';
       }
+      setRgbOutput(result)
     }
   }
 
