@@ -1,29 +1,28 @@
-import {useState} from "react";
-import {hetToRgbConverter} from "../../utils/hetToRgbConverter";
+import { useState } from "react";
+import { hetToRgbConverter } from "../../utils/hetToRgbConverter";
 
-import classes from './Converter.module.css';
+import classes from "./Converter.module.css";
 
 const Converter = () => {
-  const [hexInput, setHexInput] = useState('');
+  const [hexInput, setHexInput] = useState("");
   const [rgbOutput, setRgbOutput] = useState("rgb(255, 255, 255)");
 
   const onChangeHandler = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     setHexInput(value);
+    let result;
     if (value.length === 7) {
-      let result = hetToRgbConverter(value);
-      if (result) {
-        result = `rgb(${result.r}, ${result.g}, ${result.b})`
-      } else {
-        result = 'Error';
-      }
-      setRgbOutput(result)
+      result = hetToRgbConverter(value);
+      result = `rgb(${result.r}, ${result.g}, ${result.b})`;
+    } else if (value.length > 7) {
+      result = "Error";
     }
-  }
+    setRgbOutput(result);    
+  };
 
   const classBackgroundColor = {
-    backgroundColor: rgbOutput !== 'Error' ? rgbOutput : 'red'
-  }
+    backgroundColor: rgbOutput !== "Error" ? rgbOutput : "red",
+  };
 
   return (
     <div className={classes.wrapper} style={classBackgroundColor}>
@@ -42,6 +41,6 @@ const Converter = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Converter;
