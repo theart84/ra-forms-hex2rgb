@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { hetToRgbConverter } from "../../utils/hetToRgbConverter";
+import { hexToRgbConverter } from "../../utils/hexToRgbConverter";
 
 import classes from "./Converter.module.css";
 
@@ -10,14 +10,13 @@ const Converter = () => {
   const onChangeHandler = (event) => {
     const { value } = event.target;
     setHexInput(value);
-    let result;
+    let result = "rgb(..., ..., ...)";
     if (value.length === 7) {
-      result = hetToRgbConverter(value);
-      result = `rgb(${result.r}, ${result.g}, ${result.b})`;
+      result = hexToRgbConverter(value) || "Error";
     } else if (value.length > 7) {
       result = "Error";
     }
-    setRgbOutput(result);    
+    setRgbOutput(result);
   };
 
   const classBackgroundColor = {
